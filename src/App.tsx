@@ -5,7 +5,7 @@ import {
   Authenticated,
   Unauthenticated,
   useMutation,
-  useQuery,
+  useQuery
 } from "convex/react";
 import { api } from "../convex/_generated/api";
 import { ModeToggle } from "./components/mode-toggle";
@@ -31,16 +31,16 @@ export default function App() {
           <div>Change theme</div>
           <ModeToggle />
         </div>
-        <div>
-          Has Pro: {hasPro ? "Yes" : "No"}
-        </div>
         <Authenticated>
           <Content />
         </Authenticated>
         <Unauthenticated>
           <SignInForm />
         </Unauthenticated>
-        <PricingTable appearance={{ baseTheme: clerkTheme, }} />
+        <div>
+          Has Pro: {hasPro ? "Yes" : "No"}
+        </div>
+        <PricingTable appearance={{ baseTheme: clerkTheme }} />
       </main>
     </>
   );
