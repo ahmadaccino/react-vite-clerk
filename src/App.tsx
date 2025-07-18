@@ -1,6 +1,6 @@
 "use client";
 
-import { SignInButton, SignUpButton, UserButton } from "@clerk/clerk-react";
+import { PricingTable, SignInButton, SignUpButton, useAuth, UserButton } from "@clerk/clerk-react";
 import {
   Authenticated,
   Unauthenticated,
@@ -9,8 +9,14 @@ import {
 } from "convex/react";
 import { api } from "../convex/_generated/api";
 import { ModeToggle } from "./components/mode-toggle";
+import { useClerkTheme } from "./hooks/use-clerk-theme";
 
 export default function App() {
+  const clerkTheme = useClerkTheme();
+  const auth = useAuth()
+  const hasPro = auth.isLoaded && auth.has({
+    plan: "pro",
+  })
   return (
     <>
       <header className="sticky top-0 z-10 bg-background p-4 border-b flex flex-row justify-between items-center">
@@ -21,9 +27,12 @@ export default function App() {
         <h1 className="text-4xl font-bold text-center">
           Convex + React + Clerk + Shadcn + Vite + Tailwind
         </h1>
-        <div className="flex flex-row gap-2 items-center border rounded-xl py-2 px-4">
+        <div className="flex flex-row gap-3 items-center border rounded-xl py-2 px-4">
           <div>Change theme</div>
           <ModeToggle />
+        </div>
+        <div>
+          Has Pro: {hasPro ? "Yes" : "No"}
         </div>
         <Authenticated>
           <Content />
@@ -31,6 +40,7 @@ export default function App() {
         <Unauthenticated>
           <SignInForm />
         </Unauthenticated>
+        <PricingTable appearance={{ baseTheme: clerkTheme, }} />
       </main>
     </>
   );
