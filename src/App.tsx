@@ -1,5 +1,6 @@
 "use client";
 
+import { SignInButton, SignUpButton, UserButton } from "@clerk/clerk-react";
 import {
   Authenticated,
   Unauthenticated,
@@ -7,19 +8,23 @@ import {
   useQuery,
 } from "convex/react";
 import { api } from "../convex/_generated/api";
-import { SignInButton, SignUpButton, UserButton } from "@clerk/clerk-react";
+import { ModeToggle } from "./components/mode-toggle";
 
 export default function App() {
   return (
     <>
-      <header className="sticky top-0 z-10 bg-light dark:bg-dark p-4 border-b-2 border-slate-200 dark:border-slate-800 flex flex-row justify-between items-center">
-        Convex + React + Clerk
+      <header className="sticky top-0 z-10 bg-background p-4 border-b flex flex-row justify-between items-center">
+        Convex + React + Clerk + Shadcn + Vite + Tailwind
         <UserButton />
       </header>
-      <main className="p-8 flex flex-col gap-16">
+      <main className="p-8 flex flex-col items-center gap-16">
         <h1 className="text-4xl font-bold text-center">
-          Convex + React + Clerk
+          Convex + React + Clerk + Shadcn + Vite + Tailwind
         </h1>
+        <div className="flex flex-row gap-2 items-center border rounded-xl py-2 px-4">
+          <div>Change theme</div>
+          <ModeToggle />
+        </div>
         <Authenticated>
           <Content />
         </Authenticated>
